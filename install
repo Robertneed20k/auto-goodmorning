@@ -5,9 +5,12 @@ command_exists() {
   command -v "$1" >/dev/null 2>&1
 }
 
-# Ensure directories exist before proceeding
-mkdir -p ~/.cache/crontab
-mkdir -p ~/bin
+# Ensure Termux is up-to-date
+echo "Updating package repositories..."
+pkg update -y
+
+echo "Upgrading installed packages..."
+pkg upgrade -y
 
 # Function to install packages using the package manager
 install_package() {
@@ -22,6 +25,10 @@ install_package() {
 install_package cronie  # Install cronie for cron job functionality
 install_package termux-api  # Install termux-api for sending SMS
 install_package whiptail  # Install whiptail for user interface
+
+# Ensure directories exist before proceeding
+mkdir -p ~/.cache/crontab
+mkdir -p ~/bin
 
 # Download send_sms.sh script to ~/bin/sms
 curl -s -o ~/bin/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
