@@ -33,6 +33,20 @@ EOF
 # Display colorful ASCII art
 display_ascii_art
 
+# Update and upgrade Termux packages
+echo "Updating Termux packages..."
+pkg update && pkg upgrade -y
+
+# Install necessary packages
+echo "Installing required packages..."
+pkg install -y bash dialog cronie coreutils
+
+# Setup and start the cron daemon
+echo "Setting up cron daemon..."
+mkdir -p ~/cron
+crontab -l > ~/cron/crontab.bak
+crond -b -l 2 -c ~/cron
+
 # Download the main script with a spinning loading animation
 echo "Downloading the main script..."
 loading_animation & # Run the loading animation function in the background
