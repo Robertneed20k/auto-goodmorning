@@ -1,6 +1,6 @@
 # Automatic SMS Sender Script
 
-This script sends a "Good morning" SMS daily at 7:30 AM using Termux on Android.
+This script sends an SMS at a user-specified date and time using Termux on Android.
 
 ### Installation
 
