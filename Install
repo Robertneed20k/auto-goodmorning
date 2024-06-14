@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download send_sms.sh from GitHub
-curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/yourusername/auto-goodmorning/main/send_sms.sh
+curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
 
 # Make the script executable
 chmod +x ~/send_sms.sh
