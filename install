@@ -1,7 +1,24 @@
 #!/bin/bash
 
-# Create necessary directories if they don't exist
+# Function to check if a command exists
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Ensure directories exist before proceeding
 mkdir -p ~/.cache/crontab
+
+# Install cronie if not already installed
+if ! command_exists cronie; then
+  echo "Installing cronie..."
+  pkg install -y cronie
+fi
+
+# Install termux-api if not already installed
+if ! command_exists termux-sms-send; then
+  echo "Installing termux-api..."
+  pkg install -y termux-api
+fi
 
 # Download and install send_sms.sh script
 curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
