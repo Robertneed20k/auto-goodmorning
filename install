@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Function to check if a command exists
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# Ensure directories exist before proceeding
+mkdir -p ~/.cache/crontab
+mkdir -p ~/bin
+
+# Install cronie if not already installed
+if ! command_exists cronie; then
+  echo "Installing cronie..."
+  pkg install -y cronie
+fi
+
+# Install termux-api if not already installed
+if ! command_exists termux-sms-send; then
+  echo "Installing termux-api..."
+  pkg install -y termux-api
+fi
+
+# Download and install send_sms.sh script to ~/bin/sms
+curl -s -o ~/bin/sms https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
+chmod +x ~/bin/sms
+
+# Ensure ~/bin is in PATH
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# Initial setup for sending SMS
+sms
+
+echo "Installation complete! Use 'sms' to configure the SMS sender."
