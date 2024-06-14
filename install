@@ -42,14 +42,15 @@ chmod +x ~/bin/sms
 # Ensure ~/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-  export PATH="$HOME/bin:$PATH"
 fi
 
 # Define sms alias in ~/.bashrc if not already defined
 if ! grep -q "alias sms=" ~/.bashrc; then
   echo 'alias sms="$HOME/bin/sms"' >> ~/.bashrc
-  source ~/.bashrc
 fi
+
+# Source .bashrc to refresh the shell environment
+source ~/.bashrc
 
 # Display completion message
 echo "Installation complete! Run 'sms' to configure and start the SMS sender."
