@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Termux permission
+termux-setup-storage
+
+# Update package
+pkg update
+
 # Function to check if a command exists
 command_exists() {
   command -v "$1" >/dev/null 2>&1
@@ -22,16 +28,27 @@ if ! command_exists termux-sms-send; then
 fi
 
 # Download and install send_sms.sh script to ~/bin/sms
+echo "Downloading the SMS script..."
 curl -s -o ~/bin/sms https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
+if [ $? -ne 0 ]; then
+  echo "Failed to download the SMS script. Please check the URL and your internet connection."
+  exit 1
+fi
+
+# Make the script executable
 chmod +x ~/bin/sms
 
 # Ensure ~/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-  export PATH="$HOME/bin:$PATH"
+  source ~/.bashrc  # Reload .bashrc to apply the new PATH
 fi
 
-# cleaner
+# Debugging information
+echo "Current PATH: $PATH"
+echo "Checking if 'sms' command is available: $(command -v sms)"
+
+# Cleaner
 clear
 
 echo "Installation complete! Use 'sms' to configure the SMS sender."
