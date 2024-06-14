@@ -7,6 +7,7 @@ command_exists() {
 
 # Ensure directories exist before proceeding
 mkdir -p ~/.cache/crontab
+mkdir -p ~/bin
 
 # Install cronie if not already installed
 if ! command_exists cronie; then
@@ -20,11 +21,17 @@ if ! command_exists termux-sms-send; then
   pkg install -y termux-api
 fi
 
-# Download and install send_sms.sh script
-curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
-chmod +x ~/send_sms.sh
+# Download and install send_sms.sh script to ~/bin/sms
+curl -s -o ~/bin/sms https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
+chmod +x ~/bin/sms
 
-# Add cron job to run send_sms.sh daily at 7:30 AM
-(crontab -l 2>/dev/null; echo "30 7 * * * ~/send_sms.sh") | crontab -
+# Ensure ~/bin is in PATH
+if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+  export PATH="$HOME/bin:$PATH"
+fi
 
-echo "Installation complete! The script will now send a 'Good morning' SMS daily at 7:30 AM."
+# Initial setup for sending SMS
+sms
+
+echo "Installation complete! Use 'sms' to configure the SMS sender."
