@@ -1,35 +1,40 @@
 #!/bin/bash
 
+# Configuration file
 CONFIG_FILE=~/sms_config.txt
 
 # Function to display the main menu using dialog
 show_menu() {
-    local options=(
-        1 "Phone Number: ${PHONE_NUMBER:-Not set}"
-        2 "Message: ${MESSAGE:-Not set}"
-        3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}"
-        4 "Schedule: ${DAILY:-Not set}"
-        5 "Save configuration and exit"
-        6 "Exit without saving"
-    )
-
     while true; do
-        option=$(dialog \
-            --clear \
-            --backtitle "SMS Scheduler" \
-            --title "Main Menu" \
-            --menu "Enter the details for scheduling the SMS:" \
-            20 60 10 \
-            "${options[@]}" \
-            2>&1 >/dev/tty)
+        # Display the main menu
+        OPTION=$(dialog --clear \
+                        --backtitle "SMS Scheduler" \
+                        --title "Main Menu" \
+                        --menu "Enter the details for scheduling the SMS:" 15 60 6 \
+                        1 "Phone Number: ${PHONE_NUMBER:-Not set}" \
+                        2 "Message: ${MESSAGE:-Not set}" \
+                        3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}" \
+                        4 "Schedule: ${DAILY:-Not set}" \
+                        5 "Save configuration and exit" \
+                        6 "Exit without saving" \
+                        2>&1 >/dev/tty)
 
-        case $option in
+        # Handle user selection
+        case $OPTION in
             1)
-                PHONE_NUMBER=$(dialog --inputbox "Enter phone number:" 8 60 "${PHONE_NUMBER:-}" 2>&1 >/dev/tty)
+                PHONE_NUMBER=$(dialog --clear \
+                                     --backtitle "SMS Scheduler" \
+                                     --title "Phone Number" \
+                                     --inputbox "Enter phone number:" 10 60 "${PHONE_NUMBER:-}" \
+                                     2>&1 >/dev/tty)
                 validate_phone_number
                 ;;
             2)
-                MESSAGE=$(dialog --inputbox "Enter message:" 8 60 "${MESSAGE:-}" 2>&1 >/dev/tty)
+                MESSAGE=$(dialog --clear \
+                                 --backtitle "SMS Scheduler" \
+                                 --title "Message" \
+                                 --inputbox "Enter message:" 10 60 "${MESSAGE:-}" \
+                                 2>&1 >/dev/tty)
                 ;;
             3)
                 select_time
@@ -45,7 +50,11 @@ show_menu() {
                 exit 0
                 ;;
             *)
-                echo "Invalid option. Please try again."
+                dialog --clear \
+                       --backtitle "SMS Scheduler" \
+                       --title "Error" \
+                       --msgbox "Invalid option. Please try again." 10 60 \
+                       2>&1 >/dev/tty
                 ;;
         esac
     done
@@ -75,7 +84,11 @@ initialize_config() {
 # Function to validate phone number
 validate_phone_number() {
     if [[ ! $PHONE_NUMBER =~ ^[0-9]{11}$ ]]; then
-        dialog --msgbox "Invalid phone number. It must be 11 digits." 8 60
+        dialog --clear \
+               --backtitle "SMS Scheduler" \
+               --title "Error" \
+               --msgbox "Invalid phone number. It must be 11 digits." 10 60 \
+               2>&1 >/dev/tty
         PHONE_NUMBER=""
     fi
 }
@@ -119,46 +132,62 @@ save_configuration() {
         echo "END_DATE=\"$END_DATE\"" >> "$CONFIG_FILE"
     fi
     setup_cron
-    dialog --msgbox "Configuration saved." 8 60
+    dialog --clear \
+           --backtitle "SMS Scheduler" \
+           --title "Success" \
+           --msgbox "Configuration saved." 10 60 \
+           2>&1 >/dev/tty
     exit 0
 }
 
 # Function to display time selection menu using dialog
 select_time() {
-    HOUR=$(dialog --menu "Select hour:" 20 60 10 \
-        01 "01" \
-        02 "02" \
-        03 "03" \
-        04 "04" \
-        05 "05" \
-        06 "06" \
-        07 "07" \
-        08 "08" \
-        09 "09" \
-        10 "10" \
-        11 "11" \
-        12 "12" \
-        2>&1 >/dev/tty)
+    HOUR=$(dialog --clear \
+                  --backtitle "SMS Scheduler" \
+                  --title "Select Hour" \
+                  --menu "Select hour:" 15 60 12 \
+                  01 "01" \
+                  02 "02" \
+                  03 "03" \
+                  04 "04" \
+                  05 "05" \
+                  06 "06" \
+                  07 "07" \
+                  08 "08" \
+                  09 "09" \
+                  10 "10" \
+                  11 "11" \
+                  12 "12" \
+                  2>&1 >/dev/tty)
 
-    MINUTE=$(dialog --menu "Select minutes:" 20 60 10 \
-        00 "00" \
-        15 "15" \
-        30 "30" \
-        45 "45" \
-        2>&1 >/dev/tty)
+    MINUTE=$(dialog --clear \
+                    --backtitle "SMS Scheduler" \
+                    --title "Select Minutes" \
+                    --menu "Select minutes:" 15 60 4 \
+                    00 "00" \
+                    15 "15" \
+                    30 "30" \
+                    45 "45" \
+                    2>&1 >/dev/tty)
 
-    AMPM=$(dialog --menu "Select AM or PM:" 20 60 10 \
-        AM "AM" \
-        PM "PM" \
-        2>&1 >/dev/tty)
+    AMPM=$(dialog --clear \
+                  --backtitle "SMS Scheduler" \
+                  --title "Select AM or PM" \
+                  --menu "Select AM or PM:" 15 60 2 \
+                  AM "AM" \
+                  PM "PM" \
+                  2>&1 >/dev/tty)
 }
 
 # Function to select schedule type using dialog
 select_schedule() {
-    DAILY=$(dialog --menu "Select schedule option:" 20 60 10 \
-        "Every day" "Every day" \
-        "Specific date range" "Specific date range" \
-        2>&1 >/dev/tty)
+    DAILY=$(dialog --clear \
+                   --backtitle "SMS Scheduler" \
+                   --title "Select Schedule" \
+                   --menu "Select schedule option:" 15 60 2 \
+                   "Every day" "Every day" \
+                   "Specific date range" "Specific date range" \
+                   2>&1 >/dev/tty)
 
     case $DAILY in
         "Every day")
@@ -166,13 +195,26 @@ select_schedule() {
             END_DATE=""
             ;;
         "Specific date range")
-            START_DATE=$(dialog --inputbox "Enter the start date to send the message (YYYY-MM-DD):" 8 60 "${START_DATE:-}" 2>&1 >/dev/tty)
+            START_DATE=$(dialog --clear \
+                                --backtitle "SMS Scheduler" \
+                                --title "Start Date" \
+                                --inputbox "Enter the start date to send the message (YYYY-MM-DD):" 10 60 "${START_DATE:-}" \
+                                2>&1 >/dev/tty)
             validate_date "$START_DATE"
-            END_DATE=$(dialog --inputbox "Enter the end date to stop sending the message (YYYY-MM-DD):" 8 60 "${END_DATE:-}" 2>&1 >/dev/tty)
+
+            END_DATE=$(dialog --clear \
+                              --backtitle "SMS Scheduler" \
+                              --title "End Date" \
+                              --inputbox "Enter the end date to stop sending the message (YYYY-MM-DD):" 10 60 "${END_DATE:-}" \
+                              2>&1 >/dev/tty)
             validate_date "$END_DATE"
             ;;
         *)
-            echo "Invalid option. Please try again."
+            dialog --clear \
+                   --backtitle "SMS Scheduler" \
+                   --title "Error" \
+                   --msgbox "Invalid option. Please try again." 10 60 \
+                   2>&1 >/dev/tty
             ;;
     esac
 }
@@ -188,7 +230,11 @@ convert_time_to_24hr() {
 validate_date() {
     local date=$1
     if ! date -d "$date" >/dev/null 2>&1; then
-        dialog --msgbox "Invalid date format. Please enter in YYYY-MM-DD format." 8 60
+        dialog --clear \
+               --backtitle "SMS Scheduler" \
+               --title "Error" \
+               --msgbox "Invalid date format. Please enter in YYYY-MM-DD format." 10 60 \
+               2>&1 >/dev/tty
         echo ""
     fi
 }
