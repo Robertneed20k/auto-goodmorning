@@ -99,7 +99,7 @@ validate_phone_number() {
 # Function to setup cron job
 setup_cron() {
     # Remove any existing cron job for sms
-    crontab -l | grep -v "sms send" | crontab -
+    crontab -l | grep -v "send_sms.sh" | crontab -
 
     # Extract configuration values
     source "$CONFIG_FILE"
@@ -110,15 +110,21 @@ setup_cron() {
     local minute=$(echo "$time_24hr" | cut -d':' -f2)
 
     if [ "$DAILY" == "yes" ]; then
-        (crontab -l 2>/dev/null; echo "$minute $hour * * * ~/bin/sms send") | crontab -
+        (crontab -l 2>/dev/null; echo "$minute $hour * * * ~/bin/send_sms.sh") | crontab -
     else
         local start_day=$(echo "$START_DATE" | cut -d'-' -f3)
         local start_month=$(echo "$START_DATE" | cut -d'-' -f2)
         local end_day=$(echo "$END_DATE" | cut -d'-' -f3)
         local end_month=$(echo "$END_DATE" | cut -d'-' -f2)
 
-        (crontab -l 2>/dev/null; echo "$minute $hour $start_day-$end_day $start_month-$end_month * ~/bin/sms send") | crontab -
+        (crontab -l 2>/dev/null; echo "$minute $hour $start_day-$end_day $start_month-$end_month * ~/bin/send_sms.sh") | crontab -
     fi
+
+    dialog --clear \
+           --backtitle "SMS Scheduler" \
+           --title "Success" \
+           --msgbox "Configuration saved.\n\nMessages will be sent as scheduled." 10 60 \
+           2>&1 >/dev/tty
 }
 
 # Function to save configuration
@@ -135,12 +141,7 @@ save_configuration() {
         echo "END_DATE=\"$END_DATE\"" >> "$CONFIG_FILE"
     fi
     setup_cron
-    dialog --clear \
-           --backtitle "SMS Scheduler" \
-           --title "Success" \
-           --msgbox "Configuration saved." 10 60 \
-           2>&1 >/dev/tty
-    clear  # Clear the screen after dialog exits
+    clear  # Clear the screen after setup_cron dialog
     exit 0
 }
 
