@@ -31,7 +31,7 @@ if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   export PATH="$HOME/bin:$PATH"
 fi
 
-# Initial setup for sending SMS
-sms
+# cleaner
+clear
 
 echo "Installation complete! Use 'sms' to configure the SMS sender."
