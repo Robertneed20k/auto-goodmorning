@@ -23,8 +23,8 @@ install_package() {
 
 # Install necessary packages
 install_package cronie  # Install cronie for cron job functionality
-install_package termux-api# Install termux-api for sending SMS
-install_package whiptail #install whiptail for user interface
+install_package termux-api  # Install termux-api for sending SMS
+install_package whiptail  #install whiptail for user interface
 
 # Download send_sms.sh script to ~/bin/sms
 curl -s -o ~/bin/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
