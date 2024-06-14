@@ -15,7 +15,7 @@ show_menu() {
                         2 "Message: ${MESSAGE:-Not set}" \
                         3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}" \
                         4 "Schedule: ${DAILY:-Not set}" \
-                        5 "Save configuration and exit" \
+                        5 "Save configuration and start background sending" \
                         6 "Exit without saving" \
                         2>&1 >/dev/tty)
 
@@ -125,6 +125,9 @@ setup_cron() {
            --title "Success" \
            --msgbox "Configuration saved.\n\nMessages will be sent as scheduled." 10 60 \
            2>&1 >/dev/tty
+
+    # Inform user that messages will be sent in background
+    echo "Messages will be sent in the background as scheduled."
 }
 
 # Function to save configuration
@@ -229,19 +232,6 @@ convert_time_to_24hr() {
     local time12=$1
     local time24=$(date -d "$time12" +%H:%M 2>/dev/null)
     echo ${time24:-invalid}
-}
-
-# Function to validate date
-validate_date() {
-    local date=$1
-    if ! date -d "$date" >/dev/null 2>&1; then
-        dialog --clear \
-               --backtitle "SMS Scheduler" \
-               --title "Error" \
-               --msgbox "Invalid date format. Please enter in YYYY-MM-DD format." 10 60 \
-               2>&1 >/dev/tty
-        echo ""
-    fi
 }
 
 # Main script execution
