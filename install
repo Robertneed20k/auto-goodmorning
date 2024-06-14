@@ -39,18 +39,18 @@ fi
 # Make the script executable
 chmod +x ~/bin/sms
 
-# Ensure ~/bin is in PATH
+# Ensure ~/bin is in PATH and export it for the current session
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-  export PATH="$HOME/bin:$PATH"  # Temporarily add to PATH for the current session
+  export PATH="$HOME/bin:$PATH"
 fi
+
+# Explicitly export the PATH in the current shell
+export PATH="$HOME/bin:$PATH"
 
 # Debugging information
 echo "Current PATH: $PATH"
 echo "Checking if 'sms' command is available: $(command -v sms)"
-
-# Source .bashrc to apply changes in the current session
-source ~/.bashrc
 
 # Cleaner
 clear
