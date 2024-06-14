@@ -3,7 +3,7 @@
 # Termux permission
 termux-setup-storage
 
-# update and upgrade package
+# Update and upgrade package
 pkg update -y
 pkg upgrade -y
 
@@ -42,12 +42,15 @@ chmod +x ~/bin/sms
 # Ensure ~/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-  source ~/.bashrc  # Reload .bashrc to apply the new PATH
+  export PATH="$HOME/bin:$PATH"  # Temporarily add to PATH for the current session
 fi
 
 # Debugging information
 echo "Current PATH: $PATH"
 echo "Checking if 'sms' command is available: $(command -v sms)"
+
+# Source .bashrc to apply changes in the current session
+source ~/.bashrc
 
 # Cleaner
 clear
