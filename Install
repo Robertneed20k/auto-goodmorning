@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Download send_sms.sh from GitHub
+curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/yourusername/auto-goodmorning/main/send_sms.sh
+
+# Make the script executable
+chmod +x ~/send_sms.sh
+
+# Add cron job to run the script daily at 7:30 AM
+(crontab -l 2>/dev/null; echo "30 7 * * * ~/send_sms.sh") | crontab -
+
+echo "Installation complete! The script will now send a 'Good morning' SMS daily at 7:30 AM."
