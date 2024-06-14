@@ -19,6 +19,9 @@ show_menu() {
                         6 "Exit without saving" \
                         2>&1 >/dev/tty)
 
+        # Clear the screen after dialog exits
+        clear
+
         # Handle user selection
         case $OPTION in
             1)
@@ -137,6 +140,7 @@ save_configuration() {
            --title "Success" \
            --msgbox "Configuration saved." 10 60 \
            2>&1 >/dev/tty
+    clear  # Clear the screen after dialog exits
     exit 0
 }
 
