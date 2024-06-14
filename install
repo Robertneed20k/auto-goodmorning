@@ -27,7 +27,7 @@ install_package termux-api  # Install termux-api for sending SMS
 install_package whiptail  # Install whiptail for user interface
 
 # Download send_sms.sh script to ~/bin/sms
-curl -s -o ~/bin/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
+curl -s -o ~/bin/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sms.sh
 chmod +x ~/bin/send_sms.sh
 
 # Ensure ~/bin is in PATH
@@ -36,18 +36,12 @@ if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   export PATH="$HOME/bin:$PATH"
 fi
 
-# Define 'sms' function to run send_sms.sh script
-sms() {
-  echo "Setting up SMS sender..."
-  ~/bin/send_sms.sh
-}
-
-# Add alias or function for 'sms' command
+# Add 'sms' command alias to ~/.bashrc
 if ! grep -q "alias sms=" ~/.bashrc; then
   echo 'alias sms="~/bin/send_sms.sh"' >> ~/.bashrc
 fi
 
-# Source .bashrc to refresh the shell environment
+# Source .bashrc to apply changes immediately
 source ~/.bashrc
 
 # Final setup message
