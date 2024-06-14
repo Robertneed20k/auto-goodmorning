@@ -11,7 +11,7 @@ function loading_animation() {
     local interval=$((duration * 1000 / num_chars))
 
     for ((i = 0; i < num_chars; i++)); do
-        echo -ne "\rDownloading the main script... ${chars[i]}"
+        echo -ne "\rDownloading the SMS script... ${chars[i]}"
         sleep 0.$interval
     done
 }
@@ -32,9 +32,6 @@ EOF
 
 # Display colorful ASCII art
 display_ascii_art
-
-# Ensure storage permission for Termux
-termux-setup-storage
 
 # Update and upgrade Termux packages
 echo "Updating package repositories..."
@@ -71,7 +68,7 @@ mkdir -p ~/bin
 echo "Downloading the SMS script..."
 loading_animation & # Run the loading animation function in the background
 pid=$!              # Get the process ID of the background task
-curl -s -o ~/bin/sms https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sms >/dev/null 2>&1
+curl -s -o ~/bin/sms https://raw.githubusercontent.com/Robertneed20k/auto-goodmorning/main/sms.sh >/dev/null 2>&1
 kill $pid >/dev/null 2>&1 # Stop the loading animation once the download is complete
 echo -e "\rDownloading the SMS script... Done"
 
