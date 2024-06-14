@@ -3,8 +3,9 @@
 # Termux permission
 termux-setup-storage
 
-# Update package
-pkg update
+# update and upgrade package
+pkg update -y
+pkg upgrade -y
 
 # Function to check if a command exists
 command_exists() {
