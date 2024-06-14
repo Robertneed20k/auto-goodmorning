@@ -34,24 +34,20 @@ install_package whiptail  # Install whiptail for user interface
 mkdir -p ~/.cache/crontab
 mkdir -p ~/bin
 
-# Download send_sms.sh script to ~/bin/send_sms.sh
+# Download send_sms.sh script to ~/bin/sms
 echo "Downloading send_sms.sh script..."
-curl -s -o ~/bin/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
-chmod +x ~/bin/send_sms.sh
-
-# Move send_sms.sh to sms and ensure it's in PATH
-mv ~/bin/send_sms.sh ~/bin/sms
+curl -s -o ~/bin/sms https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh
+chmod +x ~/bin/sms
 
 # Ensure ~/bin is in PATH
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
-  export PATH="$HOME/bin:$PATH"
 fi
 
 # Define sms function and add alias in ~/.bashrc
 setup_sms_command() {
-  if ! grep -q "sms()" ~/.bashrc; then
-    echo 'sms() { ~/bin/sms; }' >> ~/.bashrc
+  if ! grep -q "alias sms=" ~/.bashrc; then
+    echo 'alias sms="$HOME/bin/sms"' >> ~/.bashrc
     source ~/.bashrc
     echo "sms command alias/function added."
   else
