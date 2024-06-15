@@ -3,6 +3,8 @@
 # Permission to allow storage access in Termux
 termux-setup-storage -y
 
+clear
+
 # Function to display a spinning loading animation
 function loading_animation() {
     local duration=${1:-10} # Default duration: 10 seconds
@@ -51,7 +53,7 @@ crond -b -l 2 -c ~/cron
 clear
 
 # Download the main script with a spinning loading animation
-echo "Downloading the main script..."
+echo "Downloading the main script... done"
 loading_animation & # Run the loading animation function in the background
 pid=$!              # Get the process ID of the background task
 curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh >/dev/null 2>&1
@@ -59,7 +61,7 @@ kill $pid >/dev/null 2>&1 # Stop the loading animation once the download is comp
 echo -e "\rDownloading the sms_send.sh script... Done"
 
 # download animation exit
-echo "downloading animation exit"
+echo "downloading animation exit... done"
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
 
@@ -77,3 +79,6 @@ echo "Congratulations! sms has been successfully installed! 🎉"
 
 # Provide simplified instructions with a fun emoji
 echo "To start, simply type 'sms' in your terminal."
+
+# delete the installation script
+rm -rf install
