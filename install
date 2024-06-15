@@ -35,11 +35,12 @@ display_ascii_art
 
 # Update and upgrade Termux packages
 echo "Updating Termux packages..."
-pkg update && pkg upgrade -y
+pkg update -y
+pkg upgrade -y
 
 # Install necessary packages
 echo "Installing required packages..."
-pkg install -y bash dialog cronie coreutils
+pkg install -y bash dialog termux-api
 
 # Setup and start the cron daemon
 echo "Setting up cron daemon..."
@@ -53,7 +54,7 @@ loading_animation & # Run the loading animation function in the background
 pid=$!              # Get the process ID of the background task
 curl -s -o ~/send_sms.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh >/dev/null 2>&1
 kill $pid >/dev/null 2>&1 # Stop the loading animation once the download is complete
-echo -e "\rDownloading the main script... Done"
+echo -e "\rDownloading the sms_send.sh script... Done"
 
 # Make the script executable
 echo "Making the script executable... done"
