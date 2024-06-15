@@ -59,6 +59,7 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 # Make the script executable
 echo "Making the script executable... done"
 chmod +x ~/send_sms.sh
+chmod +x ~/exit.sh
 
 # Move the script to a directory in $PATH
 echo "Moving the script to a directory in \$PATH... done"
