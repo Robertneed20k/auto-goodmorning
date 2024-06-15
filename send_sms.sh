@@ -225,7 +225,7 @@ start_background_sending() {
 
 # Function for cool exit animation
 cool_exit() {
-    /data/data/com.termux/files/home/exit.sh
+    $home/exit.sh
 
     # Define the animation frames
     frames=(
