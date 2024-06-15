@@ -225,7 +225,7 @@ start_background_sending() {
 
 # Function for cool exit animation
 cool_exit() {
-    $home/exit.sh
+    "$home/exit.sh"
 
     # Define the animation frames
     frames=(
