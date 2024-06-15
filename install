@@ -40,7 +40,7 @@ pkg upgrade -y
 
 # Install necessary packages
 echo "Installing required packages..."
-pkg install -y bash dialog termux-api
+pkg install -y bash dialog termux-api ncurses-utils
 
 # Setup and start the cron daemon
 echo "Setting up cron daemon..."
