@@ -3,6 +3,13 @@
 # Configuration file
 CONFIG_FILE="$HOME/sms_config.txt"
 
+# Function to display an error message and exit
+show_error_and_exit() {
+    local message="$1"
+    echo "Error: $message"
+    exit 1
+}
+
 # Function to display the main menu using dialog
 show_menu() {
     while true; do
@@ -28,8 +35,8 @@ show_menu() {
             4) select_schedule ;;
             5) save_and_schedule ;;
             6) send_now ;;
-            7) echo "Exiting without saving..."; exit 0 ;;
-            *) show_error "Invalid option. Please try again." ;;
+            7) cool_exit ;;
+            *) show_error_and_exit "Invalid option. Please try again." ;;
         esac
     done
 }
@@ -47,7 +54,7 @@ enter_phone_number() {
 # Function to validate phone number format
 validate_phone_number() {
     if [[ ! $PHONE_NUMBER =~ ^[0-9]{11}$ ]]; then
-        show_error "Invalid phone number. It must be 11 digits."
+        show_error_and_exit "Invalid phone number. It must be 11 digits."
         PHONE_NUMBER=""
     fi
 }
@@ -83,12 +90,8 @@ select_time() {
 
     MINUTE=$(dialog --clear \
                     --backtitle "SMS Scheduler" \
-                    --title "Select Minutes" \
-                    --menu "Select minutes:" 15 60 4 \
-                    00 "00" \
-                    15 "15" \
-                    30 "30" \
-                    45 "45" \
+                    --title "Enter Minutes" \
+                    --inputbox "Enter minutes (00-59):" 10 60 "${MINUTE:-}" \
                     2>&1 >/dev/tty)
 
     AMPM=$(dialog --clear \
@@ -119,7 +122,7 @@ select_schedule() {
             enter_start_date
             enter_end_date
             ;;
-        *) show_error "Invalid option. Please try again." ;;
+        *) show_error_and_exit "Invalid option. Please try again." ;;
     esac
 }
 
@@ -147,7 +150,7 @@ enter_end_date() {
 validate_date() {
     local date=$1
     if ! date -d "$date" >/dev/null 2>&1; then
-        show_error "Invalid date format. Please use YYYY-MM-DD."
+        show_error_and_exit "Invalid date format. Please use YYYY-MM-DD."
         START_DATE=""
         END_DATE=""
     fi
@@ -156,13 +159,11 @@ validate_date() {
 # Function to send SMS immediately using Termux
 send_now() {
     if [[ -z $PHONE_NUMBER ]]; then
-        show_error "Phone number not set. Please enter a valid phone number."
-        return
+        show_error_and_exit "Phone number not set. Please enter a valid phone number."
     fi
 
     if [[ -z $MESSAGE ]]; then
-        show_error "Message not set. Please enter a message."
-        return
+        show_error_and_exit "Message not set. Please enter a message."
     fi
 
     termux-sms-send -n "$PHONE_NUMBER" "$MESSAGE"
@@ -179,13 +180,13 @@ show_success() {
            2>&1 >/dev/tty
 }
 
-# Function to save configuration and setup cron job
+# Function to save configuration and setup background sending
 save_and_schedule() {
     save_configuration
-    setup_cron
+    start_background_sending &
     clear
     echo "Messages will be sent in the background as scheduled."
-    exit 0
+    cool_exit
 }
 
 # Function to save configuration to file
@@ -198,43 +199,51 @@ save_configuration() {
         echo "MINUTE=\"$MINUTE\""
         echo "AMPM=\"$AMPM\""
         echo "DAILY=\"$DAILY\""
-        if [ "$DAILY" == "no" ]; then
+        if [ "$DAILY" == "Specific date range" ]; then
             echo "START_DATE=\"$START_DATE\""
             echo "END_DATE=\"$END_DATE\""
         fi
     } > "$CONFIG_FILE"
 }
 
-# Function to setup cron job
-setup_cron() {
-    crontab -l | grep -v "send_sms.sh" | crontab -
-
-    local cron_expression
-    if [ "$DAILY" == "yes" ]; then
-        cron_expression="$MINUTE $HOUR * * * $HOME/bin/send_sms.sh"
-    else
-        local start_day=$(date -d "$START_DATE" "+%-d")
-        local start_month=$(date -d "$START_DATE" "+%-m")
-        local end_day=$(date -d "$END_DATE" "+%-d")
-        local end_month=$(date -d "$END_DATE" "+%-m")
-        cron_expression="$MINUTE $HOUR $start_day-$end_day $start_month-$end_month * $HOME/bin/send_sms.sh"
-    fi
-
-    (crontab -l 2>/dev/null; echo "$cron_expression") | crontab -
-
-    show_success "Configuration saved.\n\nMessages will be sent as scheduled."
+# Function to start background sending based on schedule
+start_background_sending() {
+    while true; do
+        current_hour=$(date +%I)
+        current_minute=$(date +%M)
+        current_ampm=$(date +%p | tr '[:lower:]' '[:upper:]')
+        
+        if [[ "$current_hour" == "$HOUR" && "$current_minute" == "$MINUTE" && "$current_ampm" == "$AMPM" ]]; then
+            termux-sms-send -n "$PHONE_NUMBER" "$MESSAGE"
+            echo "Sent SMS to $PHONE_NUMBER: $MESSAGE"
+            sleep 60  # Sleep for 60 seconds to prevent repeated sending in the same minute
+        fi
+        
+        sleep 10  # Check every 10 seconds
+    done
 }
 
-# Function to display error message dialog
-show_error() {
-    local message="$1"
-    dialog --clear \
-           --backtitle "SMS Scheduler" \
-           --title "Error" \
-           --msgbox "$message" 10 60 \
-           2>&1 >/dev/tty
+# Function for cool exit animation
+cool_exit() {
+    clear
+    echo "Exiting..."
+
+    # Define the animation frames
+    frames=(
+        "Thank you for using SMS Scheduler!"
+        "Goodbye!"
+    )
+
+    # Loop through frames with delays for animation effect
+    for frame in "${frames[@]}"; do
+        echo "$frame"
+        sleep 1
+        clear
+    done
+
+    # Exit the script
+    exit 0
 }
 
 # Main script execution
-initialize_or_load_config
 show_menu
