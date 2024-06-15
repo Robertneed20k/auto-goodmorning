@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Permission to allow storage access in Termux
-termux-setup-storage
+termux-setup-storage -y
 
 # Function to display a spinning loading animation
 function loading_animation() {
