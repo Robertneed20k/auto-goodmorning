@@ -23,7 +23,7 @@ show_menu() {
                         4 "Schedule: ${DAILY:-Not set}" \
                         5 "Save configuration and start background sending" \
                         6 "Send Now" \
-                        7 "Exit without saving" \
+                        7 "Exit" \
                         2>&1 >/dev/tty)
 
         clear
