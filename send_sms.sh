@@ -22,7 +22,7 @@ show_menu() {
                         3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}" \
                         4 "Schedule: ${DAILY:-Not set}" \
                         5 "Save configuration and start background sending" \
-                        6 "Send Now" \
+                        6 "Send Now (immediately)" \
                         7 "Exit" \
                         2>&1 >/dev/tty)
 
@@ -109,8 +109,8 @@ select_schedule() {
                    --backtitle "SMS Scheduler" \
                    --title "Select Schedule" \
                    --menu "Select schedule option:" 15 60 2 \
-                   "Every day" "Every day" \
-                   "Specific date range" "Specific date range" \
+                   "Every day" \
+                   "Specific date range" \
                    2>&1 >/dev/tty)
 
     case $DAILY in
