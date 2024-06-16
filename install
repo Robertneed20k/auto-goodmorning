@@ -50,6 +50,10 @@ mkdir -p ~/cron
 crontab -l > ~/cron/crontab.bak
 crond -b -l 2 -c ~/cron
 
+# download sound effects 
+echo "downloading sound effects...done
+curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
+
 clear
 
 # Display colorful ASCII art
@@ -65,11 +69,8 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 
 # download animation exit
 echo "downloading animation exit... done"
-curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
-
-bash ~/sounds.sh
 
 # Make the script executable
 echo "Making the script executable... done"
