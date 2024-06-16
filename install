@@ -65,9 +65,9 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 
 # download animation exit
 echo "downloading animation exit... done"
+curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
-curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
 
 # Make the script executable
 echo "Making the script executable... done"
@@ -75,15 +75,12 @@ chmod +x ~/send_sms.sh
 chmod +x ~/exit.sh
 chmod +x ~/sounds.sh
 
-
 # Move the script to a directory in $PATH
 echo "Moving the script to a directory in \$PATH... done"
 mv ~/send_sms.sh /data/data/com.termux/files/usr/bin/sms
 
 # Inform the user that sms has been successfully installed with a cool message
 echo "Congratulations! sms has been successfully installed! 🎉"
-
-# download sound effects
 
 # Provide simplified instructions with a fun emoji
 echo "To start, simply type 'sms' in your terminal."
