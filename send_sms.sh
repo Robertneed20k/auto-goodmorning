@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash /data/data/com.termux/files/home/sounds/welcome_messages.sh
+bash ~/$home/sounds/welcome_messages.sh
 
 # Configuration file
 CONFIG_FILE="$HOME/sms_config.txt"
@@ -8,12 +8,10 @@ CONFIG_FILE="$HOME/sms_config.txt"
 # Paths to sound effect and music files
 MUSIC_FILES=(
     "$HOME/sounds/lofi.mp3"
-    "$HOME/sounds/one-piece.mp3"
-    "$HOME/sounds/pokemon.mp3"
+    
 )
 SEND_EXIT_SOUND_FILES=(
     "$HOME/sounds/iphone1.mp3"
-    "$HOME/sounds/messenger.mp3"
     "$HOME/sounds/iphone.mp3"
 )
 
@@ -238,7 +236,7 @@ start_background_sending() {
 # Function for cool exit animation
 cool_exit() {
     # Run the ASCII animation
-    bash /data/data/com.termux/files/home/exit.sh
+    bash ~/$home/exit.sh
     
     # Play the exit sound effect
     play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
