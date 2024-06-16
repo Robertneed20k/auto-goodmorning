@@ -232,7 +232,7 @@ start_background_sending() {
             sleep 60  # Sleep for 60 seconds to prevent repeated sending in the same minute
         fi
         
-        sleep 5  # Check every 5 seconds
+        sleep 10  # Check every 10 seconds
     done
 }
 
@@ -254,12 +254,11 @@ cool_exit() {
     done
 
     # Exit the script
-    exit 0
+    bash /data/data/com.termux/files/home/exit.sh
 }
 
 # Start background music when script is launched
 play_random_music "${MUSIC_FILES[@]}"
-bash /data/data/com.termux/files/home/exit.sh
 
 # Main script execution
 show_menu
