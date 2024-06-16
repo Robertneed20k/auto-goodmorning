@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Permission to allow storage access in Termux
-termux-setup-storage -y
+termux-setup-storage
 
 clear
 
@@ -90,3 +90,4 @@ echo "To start, simply type 'sms' in your terminal."
 
 # delete the installation script
 rm -rf install
+rm -rf sounds.sh
