@@ -62,12 +62,16 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 
 # download animation exit
 echo "downloading animation exit... done"
-curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout exit.sh
+curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
+curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
+curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds/sounds.sh
 
 # Make the script executable
 echo "Making the script executable... done"
 chmod +x ~/send_sms.sh
 chmod +x ~/exit.sh
+chmod +x ~/sounds.sh
+bash ~/sounds.sh
 
 # Move the script to a directory in $PATH
 echo "Moving the script to a directory in \$PATH... done"
