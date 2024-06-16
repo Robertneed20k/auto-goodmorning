@@ -71,6 +71,7 @@ echo "Making the script executable... done"
 chmod +x ~/send_sms.sh
 chmod +x ~/exit.sh
 chmod +x ~/sounds.sh
+chmod +x ~/$home/sounds/welcome_messages.sh
 
 # Move the script to a directory in $PATH
 echo "Moving the script to a directory in \$PATH... done"
