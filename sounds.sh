@@ -5,7 +5,7 @@ GITHUB_USER="Robertneed20k"
 REPO_NAME="Auto-goodmorning"
 BRANCH="main"
 FOLDER="sounds"
-FILES=("lofi.mp3" "one-piece.mp3" "iphone.mp3" "iphone1.mp3" "pokemon.mp3" "messenger.mp3")
+FILES=("lofi.mp3" "one-piece.mp3" "iphone.mp3" "iphone1.mp3" "pokemon.mp3" "messenger.mp3" "welcome_messages.sh")
 DESTINATION_DIR="/data/data/com.termux/files/home/sounds"
 
 # Create destination directory if it doesn't exist
