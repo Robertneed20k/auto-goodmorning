@@ -90,4 +90,3 @@ echo "To start, simply type 'sms' in your terminal."
 
 # delete the installation script
 rm -rf install
-rm -rf sounds.sh
