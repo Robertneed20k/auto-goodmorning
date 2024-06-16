@@ -29,5 +29,3 @@ random_message=${welcome_messages[$RANDOM % ${#welcome_messages[@]}]}
 
 # Display the random message using termux-toast
 termux-toast "$random_message"
-
-bash /data/data/com.termux/files/home/bin/sms
