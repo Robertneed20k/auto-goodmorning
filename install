@@ -3,6 +3,8 @@
 # Permission to allow storage access in Termux
 termux-setup-storage
 
+curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
+
 clear
 
 # Function to display a spinning loading animation
