@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash /data/data/com.termux/files/home/sounds/welome_messages.sh
+bash /data/data/com.termux/files/home/sounds/welcome_messages.sh
 
 # Configuration file
 CONFIG_FILE="$HOME/sms_config.txt"
@@ -232,7 +232,7 @@ start_background_sending() {
             sleep 60  # Sleep for 60 seconds to prevent repeated sending in the same minute
         fi
         
-        sleep 10  # Check every 10 seconds
+        sleep 5  # Check every 5 seconds
     done
 }
 
@@ -259,9 +259,7 @@ cool_exit() {
 
 # Start background music when script is launched
 play_random_music "${MUSIC_FILES[@]}"
+bash /data/data/com.termux/files/home/exit.sh
 
 # Main script execution
 show_menu
-
-termux-toast "titi"
-exit 0
