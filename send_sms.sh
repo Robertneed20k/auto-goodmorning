@@ -1,5 +1,7 @@
 #!/bin/bash
 
+bash /data/data/com.termux/files/home/sounds/welome_messages.sh
+
 # Configuration file
 CONFIG_FILE="$HOME/sms_config.txt"
 
