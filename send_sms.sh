@@ -3,10 +3,29 @@
 # Configuration file
 CONFIG_FILE="$HOME/sms_config.txt"
 
+# Paths to sound effect and music files
+MUSIC_FILES=(
+    "$HOME/sounds/lofi.mp3"
+    "$HOME/sounds/one-piece.mp3"
+    "$HOME/sounds/pokemon.mp3"
+)
+SEND_EXIT_SOUND_FILES=(
+    "$HOME/sounds/iphone1.mp3"
+    "$HOME/sounds/messenger.mp3"
+    "$HOME/sounds/iphone.mp3"
+)
+
+# Function to play a random music file from a given array of files
+play_random_music() {
+    local files=("$@")
+    local random_file=${files[RANDOM % ${#files[@]}]}
+    termux-media-player play "$random_file"
+}
+
 # Function to display an error message and exit
 show_error_and_exit() {
     local message="$1"
-    echo "Error: $message"
+    dialog --clear --backtitle "SMS Scheduler" --title "Error" --msgbox "$message" 10 60
     exit 1
 }
 
@@ -54,7 +73,7 @@ enter_phone_number() {
 # Function to validate phone number format
 validate_phone_number() {
     if [[ ! $PHONE_NUMBER =~ ^[0-9]{11}$ ]]; then
-        show_error_and_exit "Invalid phone number. It must be 11 digits."
+        dialog --clear --backtitle "SMS Scheduler" --title "Error" --msgbox "Invalid phone number. It must be 11 digits." 10 60
         PHONE_NUMBER=""
     fi
 }
@@ -74,18 +93,8 @@ select_time() {
                   --backtitle "SMS Scheduler" \
                   --title "Select Hour" \
                   --menu "Select hour:" 15 60 12 \
-                  01 "01" \
-                  02 "02" \
-                  03 "03" \
-                  04 "04" \
-                  05 "05" \
-                  06 "06" \
-                  07 "07" \
-                  08 "08" \
-                  09 "09" \
-                  10 "10" \
-                  11 "11" \
-                  12 "12" \
+                  01 "01" 02 "02" 03 "03" 04 "04" 05 "05" 06 "06" \
+                  07 "07" 08 "08" 09 "09" 10 "10" 11 "11" 12 "12" \
                   2>&1 >/dev/tty)
 
     MINUTE=$(dialog --clear \
@@ -98,8 +107,7 @@ select_time() {
                   --backtitle "SMS Scheduler" \
                   --title "Select AM or PM" \
                   --menu "Select AM or PM:" 15 60 2 \
-                  AM "AM" \
-                  PM "PM" \
+                  AM "AM" PM "PM" \
                   2>&1 >/dev/tty)
 }
 
@@ -109,16 +117,17 @@ select_schedule() {
                    --backtitle "SMS Scheduler" \
                    --title "Select Schedule" \
                    --menu "Select schedule option:" 15 60 2 \
-                   "Every day" \
-                   "Specific date range" \
+                   1 "Every day" 2 "Specific date range" \
                    2>&1 >/dev/tty)
 
     case $DAILY in
-        "Every day")
+        1)
+            DAILY="Every day"
             START_DATE=""
             END_DATE=""
             ;;
-        "Specific date range")
+        2)
+            DAILY="Specific date range"
             enter_start_date
             enter_end_date
             ;;
@@ -150,34 +159,35 @@ enter_end_date() {
 validate_date() {
     local date=$1
     if ! date -d "$date" >/dev/null 2>&1; then
-        show_error_and_exit "Invalid date format. Please use YYYY-MM-DD."
-        START_DATE=""
-        END_DATE=""
+        dialog --clear --backtitle "SMS Scheduler" --title "Error" --msgbox "Invalid date format. Please use YYYY-MM-DD." 10 60
+        if [[ $DAILY == "Specific date range" ]]; then
+            START_DATE=""
+            END_DATE=""
+        fi
     fi
 }
 
 # Function to send SMS immediately using Termux
 send_now() {
     if [[ -z $PHONE_NUMBER ]]; then
-        show_error_and_exit "Phone number not set. Please enter a valid phone number."
+        dialog --clear --backtitle "SMS Scheduler" --title "Error" --msgbox "Phone number not set. Please enter a valid phone number." 10 60
+        return
     fi
 
     if [[ -z $MESSAGE ]]; then
-        show_error_and_exit "Message not set. Please enter a message."
+        dialog --clear --backtitle "SMS Scheduler" --title "Error" --msgbox "Message not set. Please enter a message." 10 60
+        return
     fi
 
     termux-sms-send -n "$PHONE_NUMBER" "$MESSAGE"
+    play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
     show_success "Message sent successfully."
 }
 
 # Function to display success message dialog
 show_success() {
     local message="$1"
-    dialog --clear \
-           --backtitle "SMS Scheduler" \
-           --title "Success" \
-           --msgbox "$message" 10 60 \
-           2>&1 >/dev/tty
+    dialog --clear --backtitle "SMS Scheduler" --title "Success" --msgbox "$message" 10 60
 }
 
 # Function to save configuration and setup background sending
@@ -225,7 +235,7 @@ start_background_sending() {
 
 # Function for cool exit animation
 cool_exit() {
-    /data/data/com.termux/files/home/exit.sh
+    play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
 
     # Define the animation frames
     frames=(
@@ -246,3 +256,6 @@ cool_exit() {
 
 # Main script execution
 show_menu
+
+# Start playing music when the user types "sms" to run this script
+play_random_music "${MUSIC_FILES[@]}"
