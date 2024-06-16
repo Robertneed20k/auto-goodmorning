@@ -12,12 +12,12 @@ DESTINATION_DIR="/data/data/com.termux/files/home/sounds"
 mkdir -p "$DESTINATION_DIR"
 
 # Download each file
-for FILE in "${FILES[@]}"; then
+for FILE in "${FILES[@]}"; do
     GITHUB_URL="https://raw.githubusercontent.com/$GITHUB_USER/$REPO_NAME/$BRANCH/$FOLDER/$FILE"
     DESTINATION="$DESTINATION_DIR/$FILE"
     
     # Download the file
-    curl -L $GITHUB_URL -o $DESTINATION
+    curl -L "$GITHUB_URL" -o "$DESTINATION"
     
     # Check if the download was successful
     if [ $? -eq 0 ]; then
