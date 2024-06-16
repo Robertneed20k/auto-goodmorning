@@ -52,3 +52,5 @@ enjoy_animation() {
 
 # Main script execution
 enjoy_animation
+
+exit 0
