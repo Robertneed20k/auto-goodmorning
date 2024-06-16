@@ -1,6 +1,6 @@
 # SMS Scheduler
 
-SMS Scheduler is a Bash script that allows you to schedule SMS messages on your Android device using Termux. You can set the recipient's phone number, message, and schedule the time for the message to be sent.
+# Scheduler is a Bash script that allows you to schedule SMS messages on your Android device using Termux. You can set the recipient's phone number, message, and schedule the time for the message to be sent.
 
 ## Features
 - Schedule SMS messages to be sent at specific times.
@@ -31,13 +31,23 @@ This will set up the SMS Scheduler and all necessary dependencies.
     ```bash
     sms
     ```
+---
 
-3. Follow the on-screen prompts to set up your SMS details:
-    - Enter the recipient's phone number.
-    - Type the message you want to send.
-    - Choose the time for the message to be sent.
-    - Select whether to send it daily or within a specific date range.
-    - Save the configuration and start the background service.
+## Upcoming Updates and Features
+
+### Future Updates
+- **Enhanced UI**: Improving the user interface for a more intuitive experience.
+- **Bug Fixes**: Addressing any reported issues to ensure smooth operation.
+- **Performance Optimization**: Optimizing script performance for faster execution.
+
+### Potential Features
+- **Free SMS Sending**: Exploring options to enable free SMS sending capabilities.
+- **Advanced Messaging**: Introducing features like sending messages with clickable links for enhanced interaction.
+- **Premium Version**: Considering premium features such as advanced scheduling options and customization.
+
+Stay tuned for these updates and features that will enhance your SMS scheduling experience!
+
+---
 
 ## Dependencies
 - Termux app
