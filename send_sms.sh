@@ -235,10 +235,12 @@ start_background_sending() {
         sleep 10  # Check every 10 seconds
     done
 }
-
 # Function for cool exit animation
 cool_exit() {
+    # Run the ASCII animation
     bash /data/data/com.termux/files/home/exit.sh
+    
+    # Play the exit sound effect
     play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
 
     # Define the animation frames
@@ -253,6 +255,9 @@ cool_exit() {
         sleep 1
         clear
     done
+
+    exit 0
+
 }
 
 # Start background music when script is launched
