@@ -65,7 +65,7 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 
 # download animation exit
 echo "downloading animation exit... done"
-curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
+curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
 
