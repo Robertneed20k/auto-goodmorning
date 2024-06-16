@@ -238,9 +238,9 @@ start_background_sending() {
 
 # Function for cool exit animation
 cool_exit() {
-    play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
     bash /data/data/com.termux/files/home/exit.sh
-    
+    play_random_music "${SEND_EXIT_SOUND_FILES[@]}"
+
     # Define the animation frames
     frames=(
         "Thank you for using SMS Scheduler!"
