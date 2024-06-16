@@ -19,6 +19,7 @@ SEND_EXIT_SOUND_FILES=(
 play_random_music() {
     local files=("$@")
     local random_file=${files[RANDOM % ${#files[@]}]}
+    termux-media-player stop
     termux-media-player play "$random_file"
 }
 
@@ -254,8 +255,8 @@ cool_exit() {
     exit 0
 }
 
+# Start background music when script is launched
+play_random_music "${MUSIC_FILES[@]}"
+
 # Main script execution
 show_menu
-
-# Start playing music when the user types "sms" to run this script
-play_random_music "${MUSIC_FILES[@]}"
