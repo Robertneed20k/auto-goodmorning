@@ -260,3 +260,6 @@ play_random_music "${MUSIC_FILES[@]}"
 
 # Main script execution
 show_menu
+
+termux-toast "titi"
+exit 0
