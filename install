@@ -52,7 +52,7 @@ crond -b -l 2 -c ~/cron
 
 # download sound effects 
 echo "downloading sound effects...done
-curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh
+curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
 
 clear
 
