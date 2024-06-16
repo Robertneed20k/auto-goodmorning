@@ -252,10 +252,6 @@ cool_exit() {
         sleep 1
         clear
     done
-
-    # Exit the script
-    bash /data/data/com.termux/files/home/exit.sh
-    exit 0
 }
 
 # Start background music when script is launched
@@ -263,3 +259,7 @@ play_random_music "${MUSIC_FILES[@]}"
 
 # Main script execution
 show_menu
+
+# Exit the script
+    bash /data/data/com.termux/files/home/exit.sh
+    exit 0
