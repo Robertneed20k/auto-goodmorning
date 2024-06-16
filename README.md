@@ -16,7 +16,7 @@ download first the termux app [download](https://github.com/termux/termux-app/re
 - Termux app installed on your Android device. You can download it from [Termux on F-Droid](https://f-droid.org/packages/com.termux/).
 
 ### Steps
-1. paste this in your termux app:
+1. to run the program copy this command and paste it to your termux app:
     ```bash
     curl -s -o ~/install https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/install
     chmod +x ~/install && bash ~/install
