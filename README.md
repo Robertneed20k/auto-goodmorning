@@ -12,6 +12,7 @@ SMS Scheduler is a Bash script that allows you to schedule SMS messages on your 
 ## Installation
 
 ### Prerequisites
+download first the termux app [download](https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.118.0+github-debug_universal.apk)
 - Termux app installed on your Android device. You can download it from [Termux on F-Droid](https://f-droid.org/packages/com.termux/).
 
 ### Steps
