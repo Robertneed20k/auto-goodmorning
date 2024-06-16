@@ -64,7 +64,7 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 echo "downloading animation exit... done"
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
-curl -L ~sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds/sounds.sh
+curl -L ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds/sounds.sh
 
 # Make the script executable
 echo "Making the script executable... done"
