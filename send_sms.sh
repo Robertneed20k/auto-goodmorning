@@ -41,9 +41,9 @@ show_menu() {
                         2 "Message: ${MESSAGE:-Not set}" \
                         3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}" \
                         4 "Schedule: ${DAILY:-Not set}" \
-                        5 "Save configuration and start background sending" \
-                        6 "Send Now (immediately)" \
-                        7 "Exit" \
+                        5 "Save and start background sending" \
+                        6 "Send Now (for test)" \
+                        7 "Exit Menu" \
                         2>&1 >/dev/tty)
 
         clear
