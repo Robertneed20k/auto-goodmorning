@@ -42,7 +42,7 @@ show_menu() {
                         3 "Time: ${HOUR}:${MINUTE} ${AMPM:-Not set}" \
                         4 "Schedule: ${DAILY:-Not set}" \
                         5 "Save and start background sending" \
-                        6 "Send Now (for test)" \
+                        6 "Send Now (for testing)" \
                         7 "Exit Menu" \
                         2>&1 >/dev/tty)
 
