@@ -44,6 +44,8 @@ pkg upgrade -y
 echo "Installing required packages..."
 pkg install -y bash dialog termux-api ncurses-utils
 
+clear
+
 # download sound effects 
 echo "downloading sound effects...done"
 curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
