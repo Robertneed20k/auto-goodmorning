@@ -68,9 +68,14 @@ echo "downloading animation exit... done"
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
 
+# download update script
+echo "downloading update script... done
+curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/update.sh
+
 # Make the script executable
 echo "Making the script executable... done"
 chmod +x ~/send_sms.sh
+chmod +x -/update.sh
 chmod +x ~/exit.sh
 chmod +x ~/sounds.sh
 chmod +x ~/$home/sounds/welcome_messages.sh
