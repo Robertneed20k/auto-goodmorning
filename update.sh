@@ -44,6 +44,10 @@ fi
 }
 
 # update repository
+# Ensure environment variables are set correctly
+echo "GitHub Username: $GITHUB_USERNAME"
+echo "GitHub Token: $GITHUB_TOKEN"
+
 # Repository information
 REPO_URL="https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/Robertneed20k/Auto-goodmorning.git"
 REPO_PATH="$HOME/Auto-goodmorning"
