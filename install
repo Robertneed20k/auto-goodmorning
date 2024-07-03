@@ -46,6 +46,12 @@ pkg install -y bash dialog termux-api ncurses-utils
 
 clear
 
+# download update script
+echo "downloading update script... done
+curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/update.sh
+
+clear
+
 # download sound effects 
 echo "downloading sound effects...done"
 curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
@@ -67,10 +73,6 @@ echo -e "\rDownloading the sms_send.sh script... Done"
 echo "downloading animation exit... done"
 curl -s -o ~/exit.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/exit.sh
 curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/.bash_logout
-
-# download update script
-echo "downloading update script... done
-curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/update.sh
 
 # Make the script executable
 echo "Making the script executable... done"
