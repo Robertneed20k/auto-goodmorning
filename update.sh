@@ -87,14 +87,14 @@ check_changes() {
 
     # Check for remote changes
     LOCAL=$(git rev-parse @)
-    REMOTE=$(git rev-parse @{u})
-    BASE=$(git merge-base @ @{u})
+    REMOTE=$(git rev-parse "@{u}")
+    BASE=$(git merge-base @ "@{u}")
 
-    if [ $LOCAL = $REMOTE ]; then
+    if [ "$LOCAL" = "$REMOTE" ]; then
         return 1
-    elif [ $LOCAL = $BASE ]; then
+    elif [ "$LOCAL" = "$BASE" ]; then
         return 0
-    elif [ $REMOTE = $BASE ]; then
+    elif [ "$REMOTE" = "$BASE" ]; then
         return 0
     else
         return 1
@@ -118,7 +118,7 @@ update_repo() {
     # Push the changes to the remote repository
     git push origin "$BRANCH"
 
-    echo -e "\e[1;32mRepository updated successfully!\e[0m"
+    echo "Repository updated successfully!"
 }
 
 # Clone the repository if it does not exist
@@ -131,5 +131,5 @@ set_git_identity
 if check_changes; then
     update_repo
 else
-    echo -e "\e[1;32mNo changes detected. Repository is up-to-date.\e[0m"
+    echo "No changes detected. Repository is up-to-date."
 fi
