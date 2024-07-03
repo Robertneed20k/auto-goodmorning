@@ -48,7 +48,7 @@ echo "GitHub Token: $GITHUB_TOKEN"
 
 # Repository information
 REPO_URL="https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/Robertneed20k/Auto-goodmorning.git"
-REPO_PATH="$HOME/Auto-goodmorning"
+REPO_PATH="$HOME"
 BRANCH="main"
 
 # Commit message
