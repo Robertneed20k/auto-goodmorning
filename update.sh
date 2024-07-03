@@ -45,7 +45,7 @@ fi
 
 # update repository
 # Repository information
-REPO_URL="https://github.com/Robertneed20k/auto-goodmorning.git"
+REPO_URL="https://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@github.com/Robertneed20k/auto-goodmorning.git"
 REPO_PATH="$HOME/auto-goodmorning"
 BRANCH="main"
 
