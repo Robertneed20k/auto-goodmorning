@@ -41,8 +41,6 @@ if check_internet; then
     update_script
 fi
 
-}
-
 # update repository
 # Ensure environment variables are set correctly
 echo "GitHub Username: $GITHUB_USERNAME"
