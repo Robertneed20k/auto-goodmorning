@@ -5,7 +5,7 @@ function check_for_updates() {
     echo "Checking for updates..."
     curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto_goodmorning/main/update.sh
     chmod +x ~/update.sh
-    ~/update_vmods.sh
+    ~/update.sh
 }
 
 # Call function to check for updates before displaying the main menu
