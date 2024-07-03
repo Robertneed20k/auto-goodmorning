@@ -45,8 +45,8 @@ fi
 
 # update repository
 # Repository information
-REPO_URL="https://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@github.com/Robertneed20k/auto-goodmorning.git"
-REPO_PATH="$HOME/auto-goodmorning"
+REPO_URL="https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/Robertneed20k/Auto-goodmorning.git"
+REPO_PATH="$HOME/Auto-goodmorning"
 BRANCH="main"
 
 # Commit message
@@ -64,7 +64,7 @@ clone_repo() {
 set_git_identity() {
     cd "$REPO_PATH" || exit
     if ! git config user.name &> /dev/null; then
-        git config user.name "Robertneed20k"
+        git config user.name "$GITHUB_USERNAME"
     fi
     if ! git config user.email &> /dev/null; then
         git config user.email "Duquerobert4@gmail.com"
