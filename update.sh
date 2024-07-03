@@ -131,3 +131,5 @@ if check_changes; then
 else
     echo -e "\e[1;32mNo changes detected. Repository is up-to-date.\e[0m"
 fi
+
+    exit 0
