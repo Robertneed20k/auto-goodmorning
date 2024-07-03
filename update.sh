@@ -60,6 +60,17 @@ clone_repo() {
     fi
 }
 
+# Function to check and set user identity if not set
+set_git_identity() {
+    cd "$REPO_PATH" || exit
+    if ! git config user.name &> /dev/null; then
+        git config user.name "Robertneed20k"
+    fi
+    if ! git config user.email &> /dev/null; then
+        git config user.email "Duquerobert4@gmail.com"
+    fi
+}
+
 # Function to check if there are any changes
 check_changes() {
     cd "$REPO_PATH" || exit
@@ -108,6 +119,9 @@ update_repo() {
 
 # Clone the repository if it does not exist
 clone_repo
+
+# Set Git user identity
+set_git_identity
 
 # Check for changes and update the repository if any are found
 if check_changes; then
