@@ -11,6 +11,7 @@ function check_for_updates() {
 # Call function to check for updates before displaying the main menu
 check_for_updates
 
+# welcome script
 bash ~/$home/sounds/welcome_messages.sh
 
 # Configuration file
