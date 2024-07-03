@@ -44,6 +44,8 @@ fi
 }
 
 # update repository
+#!/bin/bash
+
 # Repository information
 REPO_URL="git@github.com:Robertneed20k/auto-goodmorning.git"
 REPO_PATH="$HOME/auto-goodmorning"
@@ -129,7 +131,3 @@ if check_changes; then
 else
     echo -e "\e[1;32mNo changes detected. Repository is up-to-date.\e[0m"
 fi
-
-# information
--robertneed20k
--************
