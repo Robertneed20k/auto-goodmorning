@@ -47,7 +47,7 @@ pkg install -y bash dialog termux-api ncurses-utils
 clear
 
 # download update script
-echo "downloading update script... done
+echo "downloading update script... done"
 curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/update.sh
 
 clear
