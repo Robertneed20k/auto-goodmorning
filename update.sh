@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL of the latest version of the script
-SCRIPT_URL="https://raw.githubusercontent.com/robertneed20k/gta-v-mods-manager/main/send_sms.sh"
+SCRIPT_URL="https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/send_sms.sh"
 
 # Path to the current script
 SCRIPT_PATH="$PREFIX/bin/sms"
