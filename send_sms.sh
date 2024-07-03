@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Function to check for updates
+function check_for_updates() {
+    echo "Checking for updates..."
+    curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto_goodmorning/main/update.sh
+    chmod +x ~/update.sh
+    ~/update_vmods.sh
+}
+
+# Call function to check for updates before displaying the main menu
+check_for_updates
+
 bash ~/$home/sounds/welcome_messages.sh
 
 # Configuration file
