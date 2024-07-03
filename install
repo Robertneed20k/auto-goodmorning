@@ -77,7 +77,7 @@ curl -s -o ~/.bash_logout https://raw.githubusercontent.com/robertneed20k/auto-g
 # Make the script executable
 echo "Making the script executable... done"
 chmod +x ~/send_sms.sh
-chmod +x -/update.sh
+chmod +x ~/update.sh
 chmod +x ~/exit.sh
 chmod +x ~/sounds.sh
 chmod +x ~/$home/sounds/welcome_messages.sh
