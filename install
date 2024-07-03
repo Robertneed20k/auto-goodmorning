@@ -53,8 +53,9 @@ curl -s -o ~/update.sh https://raw.githubusercontent.com/robertneed20k/auto-good
 clear
 
 # download sound effects 
-echo "downloading sound effects...done"
+echo "downloading sound effects..."
 curl -s -o ~/sounds.sh https://raw.githubusercontent.com/robertneed20k/auto-goodmorning/main/sounds.sh && bash ~/sounds.sh
+echo "done"
 
 clear
 
@@ -95,4 +96,3 @@ echo "To start, simply type 'sms' in your terminal."
 # delete the installation script
 rm -rf install
 rm -rf sounds.sh
-
