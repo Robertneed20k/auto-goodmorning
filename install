@@ -42,7 +42,7 @@ pkg upgrade -y
 
 # Install necessary packages
 echo "Installing required packages..."
-pkg install -y bash dialog termux-api ncurses-utils wget git
+pkg install -y bash dialog termux-api ncurses-utils wget
 
 clear
 
